@@ -26,8 +26,8 @@
 //	return 0;
 //}
 
-int main()
-{
+//int main()
+//{
 	//char* p = "abcdef";//a的地址放到p里面了。
 	//printf("%d\n", strlen(p));//6
 	//printf("%d\n", strlen(p + 1));//5 - b的地址
@@ -43,18 +43,47 @@ int main()
 	//printf("%d\n", sizeof(&p));//4/8 - 地址
 	//printf("%d\n", sizeof(&p + 1));//4/8 - 地址
 	//printf("%d\n", sizeof(&p[0] + 1));//4/8 - 地址
-
+//
 	//二维数组
-	int a[3][4] = { 0 };
-	printf("%d\n", sizeof(a));
-	printf("%d\n", sizeof(a[0][0]));
-	printf("%d\n", sizeof(a[0]));
-	printf("%d\n", sizeof(a[0] + 1));
-	printf("%d\n", sizeof(*(a[0] + 1)));
-	printf("%d\n", sizeof(a + 1));
-	printf("%d\n", sizeof(*(a + 1)));
-	printf("%d\n", sizeof(&a[0] + 1));
-	printf("%d\n", sizeof(*(&a[0] + 1)));
-	printf("%d\n", sizeof(*a));
+	//int a[3][4] = { 0 };
+	//printf("%d\n", sizeof(a));//48 - 3 * 4 * 4 = 48
+	//printf("%d\n", sizeof(a[0][0]));//4
+	//printf("%d\n", sizeof(a[0]));//16 - a[0]相当于第一行作为一维数组的数组名，计算第一行的大小
+	//printf("%d\n", sizeof(a[0] + 1));//4/8 - 第一行第二个元素的地址，a[0]此时是首元素的地址。
+	//printf("%d\n", sizeof(*(a[0] + 1)));//4 
+	//printf("%d\n", sizeof(a + 1));//4 - a是首元素地址，二维数组的首元素是第一行，a+1是第二行的地址。
+	//printf("%d\n", sizeof(*(a + 1)));//16  -   sizeof(a[1])计算第二行的大小，单位是字节。
+	//printf("%d\n", sizeof(&a[0] + 1));//4 - 第二行的地址 
+	//printf("%d\n", sizeof(*(&a[0] + 1)));//16 - 计算第二行的大小，单位是字节。
+	//printf("%d\n", sizeof(*a));//16 - a是首元素地址，就是第一行的地址。
+	//printf("%d\n", sizeof(a[3]));//16 - a[0]一样
+	//return 0;
+//}
+
+//int main()
+//{
+//	int a[5] = { 1, 2, 3, 4, 5 };
+//	int* ptr = (int*)(&a + 1);//ptr - 数组的地址跳过了整个数组。
+//	printf("%d,%d", *(a + 1), *(ptr - 1));
+//	//2,1
+//	return 0;
+//}
+
+struct Test
+{
+	int Num;
+	char* pcName;
+	short sDate;
+	char cha[2];
+	short sBa[4];
+}*p;
+//假设p 的值为0x100000。 如下表表达式的值分别为多少？
+//已知，结构体Test类型的变量大小是20个字节
+int main()
+{
+	p = (struct Test*)0x100000;
+	printf("%p\n", p + 0x1);//0x00100014
+	printf("%p\n", (unsigned long)p + 0x1);//0x100001
+	printf("%p\n", (unsigned int*)p + 0x1); // 0x100004
 	return 0;
 }
