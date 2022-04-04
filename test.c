@@ -69,21 +69,50 @@
 //	return 0;
 //}
 
-struct Test
-{
-	int Num;
-	char* pcName;
-	short sDate;
-	char cha[2];
-	short sBa[4];
-}*p;
-//假设p 的值为0x100000。 如下表表达式的值分别为多少？
-//已知，结构体Test类型的变量大小是20个字节
+//struct Test
+//{
+//	int Num;
+//	char* pcName;
+//	short sDate;
+//	char cha[2];
+//	short sBa[4];
+//}*p;
+////假设p 的值为0x100000。 如下表表达式的值分别为多少？
+////已知，结构体Test类型的变量大小是20个字节
+//int main()
+//{
+//	p = (struct Test*)0x100000;
+//	printf("%p\n", p + 0x1);//0x00100014
+//	printf("%p\n", (unsigned long)p + 0x1);//0x100001
+//	printf("%p\n", (unsigned int*)p + 0x1); // 0x100004
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a[4] = { 1, 2, 3, 4 };
+//	int* ptr1 = (int*)(&a + 1);
+//	int* ptr2 = (int*)((int)a + 1);
+//	printf("%x,%x", ptr1[-1], *ptr2);//0x4,0x02000000
+//	printf("hello!");
+//	return 0;
+//}
+
+//int main()
+//{
+//	int a[3][2] = { (0, 1), (2, 3), (4, 5) };//逗号表达式
+//	int* p;
+//	p = a[0];
+//	printf("%d", p[0]);//
+//	return 0;
+//}
+
 int main()
 {
-	p = (struct Test*)0x100000;
-	printf("%p\n", p + 0x1);//0x00100014
-	printf("%p\n", (unsigned long)p + 0x1);//0x100001
-	printf("%p\n", (unsigned int*)p + 0x1); // 0x100004
+	int a[5][5];
+	int(*p)[4];
+	p = a;//int (*)[4] = int (*)[5]
+	printf("%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);//-4
+	//p[4][2] ----- *(*(p+4)+2)
 	return 0;
 }
