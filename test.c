@@ -107,12 +107,42 @@
 //	return 0;
 //}
 
+//int main()
+//{
+//	int a[5][5];
+//	int(*p)[4];
+//	p = a;//int (*)[4] = int (*)[5]
+//	printf("%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);//-4
+//	//p[4][2] ----- *(*(p+4)+2)
+//	return 0;
+//}
+
+//int main()
+//{
+//	int aa[2][5] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//	int* ptr1 = (int*)(&aa + 1);
+//	int* ptr2 = (int*)(*(aa + 1));
+//	printf("%d,%d", *(ptr1 - 1), *(ptr2 - 1));
+//	return 0;
+//}
+
+//int main()
+//{
+//	char* a[] = { "work","at","alibaba" };//指针数组，分别存放‘w’，‘a'，’a'的地址。
+//	char** pa = a;//pa为指针数组的地址
+//	pa++;
+//	printf("%s\n", *pa);//以‘a’开头，打印一个字符串。
+//	return 0;
+//}
+
 int main()
 {
-	int a[5][5];
-	int(*p)[4];
-	p = a;//int (*)[4] = int (*)[5]
-	printf("%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);//-4
-	//p[4][2] ----- *(*(p+4)+2)
+	char* c[] = { "ENTER","NEW","POINT","FIRST" };
+	char** cp[] = { c + 3,c + 2,c + 1,c };
+	char*** cpp = cp;
+	printf("%s\n", **++cpp);//++会累计到下面的计算
+	printf("%s\n", *-- * ++cpp + 3);// ++   *   --   *   +3
+	printf("%s\n", *cpp[-2] + 3);
+	printf("%s\n", cpp[-1][-1] + 1);//cpp[-1][-1] == *(*(cpp-1)-1)+1
 	return 0;
 }
